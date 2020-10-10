@@ -13,8 +13,7 @@ printf "Made for Proxmox on date 10/10/2020!\n"
 printf "Tested on Proxmox Virtual ENvironment 6.2-12\n\n"
 
 read -p "Do you want to run the self configure script? (y/n) " action
-if [ "$action" = "y" ]
-then
+if [ "$action" = "y" ]; then
 
 
 	printf "Removing enterprise repo...\n"
