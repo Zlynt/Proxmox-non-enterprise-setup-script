@@ -10,7 +10,7 @@ DEBIAN_CODENAME=`cat /etc/os-release | grep VERSION_CODENAME | cut -d "=" -f2`
 
 printf "\n${BASH_GREEN}===== PROXMOX NON ENTERPRISE SETUP =====${BASH_WHITE}\n\n"
 printf "Made for Proxmox on date 10/10/2020!\n"
-printf "Tested on Proxmox Virtual ENvironment 6.2-12\n\n"
+printf "Tested on Proxmox Virtual Environment 6.2-12\n\n"
 
 read -p "Do you want to run the self configure script? (y/n) " action
 if [ "$action" = "y" ]; then
