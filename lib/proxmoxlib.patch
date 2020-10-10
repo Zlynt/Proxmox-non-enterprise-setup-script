@@ -1,0 +1,32 @@
+--- proxmoxlib.js.bak	2020-10-10 13:27:36.000000000 +0100
++++ proxmoxlib.js	2020-10-10 13:20:24.000000000 +0100
+@@ -129,7 +129,7 @@
+ 
+     getNoSubKeyHtml: function(url) {
+ 	// url http://www.proxmox.com/products/proxmox-ve/subscription-service-plans
+-	return Ext.String.format('You do not have a valid subscription for this server. Please visit <a target="_blank" href="{0}">www.proxmox.com</a> to get a list of available options.', url || 'https://www.proxmox.com');
++	return Ext.String.format('You are using a Community Edition of Proxmox and thus the updates comes from Proxmox No-Subscription Repository. Please visit <a target="_blank" href="http://www.proxmox.com/products/proxmox-ve/subscription-service-plans">www.proxmox.com</a> to get a list of available options.', url || 'https://www.proxmox.com');
+     },
+ 
+     format_boolean_with_default: function(value) {
+@@ -460,10 +460,9 @@
+ 		},
+ 		success: function(response, opts) {
+ 		    let res = response.result;
+-		    if (res === null || res === undefined || !res || res
+-			.data.status !== 'Active') {
++		    if (res === null || res === undefined || !res  || window.localStorage.usingcommunity !== "yes") {
+ 			Ext.Msg.show({
+-			    title: gettext('No valid subscription - Using non enterprise'),
++			    title: gettext('Community Edition'),
+ 			    icon: Ext.Msg.WARNING,
+ 			    message: Proxmox.Utils.getNoSubKeyHtml(res.data.url),
+ 			    buttons: Ext.Msg.OK,
+@@ -471,6 +470,7 @@
+ 				if (btn !== 'ok') {
+ 				    return;
+ 				}
++				window.localStorage.setItem("usingcommunity", "yes");
+ 				orig_cmd();
+ 			    },
+ 			});
