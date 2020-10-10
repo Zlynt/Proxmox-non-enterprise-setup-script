@@ -19,9 +19,7 @@ then
 
 	printf "Removing enterprise repo...\n"
 	rm /etc/apt/sources.list.d/pve-enterprise.list &>/dev/null
-
-	if [ grep "deb http://download.proxmox.com/debian/pve buster pve-no-subscription" /etc/apt/sources.list ]
-	then
+	if ! grep -q "pve-no-subscription" /etc/apt/sources.list; then
 
 		printf "Adding non enterprise repo...\n"
 		#File location : /etc/apt/sources.list
@@ -34,6 +32,11 @@ then
 	apt update &>/dev/null
 	printf "Upgrading apt packages...\n"
 	apt -y dist-upgrade &>/dev/null
+
+	printf "Patching non licence message box on login...\n"
+	wget -q https://raw.githubusercontent.com/Zlynt/Proxmox-non-enterprise-setup-script/main/lib/proxmoxlib.patch
+	patch -u -b /usr/share/javascript/proxmox-widget-toolkit/proxmoxlib.js -i proxmoxlib.patch &>/dev/null
+	rm proxmoxlib.patch
 else
 	printf "\n${BASH_RED}The script has not done anything!${BASH_WHITE}\n\n"
 fi
