@@ -4,7 +4,8 @@ This script configures the non enterprise repo and prepares the proxmox server f
 
 # Notes
 > By installing you agree with the licence terms.
-> This installer is going to install LEMP and its dependencies.
+
+> This installer is going to configure Proxmox with a non enterprise licence.
 ### Installation
 
 ```sh
