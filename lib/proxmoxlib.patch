@@ -1,5 +1,5 @@
---- proxmoxlib.js.bak	2020-10-10 13:27:36.000000000 +0100
-+++ proxmoxlib.js	2020-10-10 13:20:24.000000000 +0100
+--- proxmoxlib.js.bak	2020-10-10 14:14:50.000000000 +0100
++++ proxmoxlib.js	2020-10-10 14:13:57.000000000 +0100
 @@ -129,7 +129,7 @@
  
      getNoSubKeyHtml: function(url) {
@@ -17,7 +17,7 @@
 -			.data.status !== 'Active') {
 +		    if (res === null || res === undefined || !res  || window.localStorage.usingcommunity !== "yes") {
  			Ext.Msg.show({
--			    title: gettext('No valid subscription - Using non enterprise'),
+-			    title: gettext('No valid subscription'),
 +			    title: gettext('Community Edition'),
  			    icon: Ext.Msg.WARNING,
  			    message: Proxmox.Utils.getNoSubKeyHtml(res.data.url),
